@@ -166,3 +166,24 @@ public:
 private:
 	ofBuffer value;
 };
+
+class ofxOscArgPoss : public ofxOscArg
+{
+public:
+    ofxOscArgPoss( vector<ofPoint> _value ){
+        value = _value;
+    }
+    ofxOscArgPoss(){};
+    
+    /// return the type of this argument
+    ofxOscArgType getType() { return OFXOSC_TYPE_BLOB; }
+    string getTypeName() { return "poss"; }
+    
+    /// return value
+    vector<ofPoint> get() const { return value; }
+    /// set value
+//    void set( const char * _value, unsigned int length ) { value.set(_value, length); }
+    
+private:
+    vector<ofPoint> value;
+};

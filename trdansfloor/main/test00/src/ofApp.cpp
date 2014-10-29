@@ -51,10 +51,17 @@ void ofApp::setup(){
     const int HEIGHT = 640;
     const int debug_window_height = HEIGHT * HEIGHT / DIVIDED_WIDTH / 4;
     
-    
     //Kinect//////////
     
     
+    
+    //OSC//////////
+    
+    // open an outgoing connection to HOST:PORT
+    sender.setup(HOST, PORT);
+    
+    
+    //OSC//////////
     
     
 }
@@ -124,6 +131,20 @@ void ofApp::update(){
     osc::update(vecPossFromKinect);
     scene->update();
     
+    //OSC//////////
+    
+    ofxOscMessage m;
+    m.setAddress("/poss");
+    m.addIntArg(vecPossFromKinect.size());
+    for (int i=0; i<vecPossFromKinect.size(); i++){
+        m.addFloatArg(vecPossFromKinect[i].x);
+        m.addFloatArg(vecPossFromKinect[i].y);
+    }
+    //m.addFloatArg(ofGetElapsedTimef());
+    sender.sendMessage(m);
+    
+    //OSC//////////
+    
     vecPossFromKinect.clear();
     vecTmpPointX.clear();
     vecTmpPointY.clear();
@@ -140,7 +161,7 @@ void ofApp::update(){
 void ofApp::draw(){
     ofPushMatrix();
     ofPushMatrix();
-    ofRotateZ(90);
+    //ofRotateZ(90);
     ofTranslate(-config::WINDOW_ID * config::DIVIDED_WIDTH, -config::HEIGHT);
     float scale = config::HEIGHT;
     ofScale( scale, scale);
@@ -192,7 +213,7 @@ void ofApp::draw(){
     
     
     //Kinect//////////
-    
+    ofPushStyle();
     ofSetColor(255, 255, 255);
     
     if(bDrawPointCloud) {
@@ -207,7 +228,7 @@ void ofApp::draw(){
     kinect2.draw(420, 320, 400, 300);
 #endif
     }
-    
+    ofPopStyle();
     //Kinect//////////
     
 }

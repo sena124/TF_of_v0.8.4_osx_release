@@ -14,7 +14,11 @@
 #include "Tile.hpp"
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"
-
+//OSC//////////
+#include "ofxOsc.h"
+#define HOST "169.254.40.194"
+#define PORT 8000
+//OSC//////////
 class ofApp : public ofBaseApp{
     
 public:
@@ -71,4 +75,12 @@ public:
     float tmpPointY;
     
     //Kinect//////////
+    
+    
+    //OSC//////////
+    ofxOscSender sender;
+    //OSC//////////
+    
+    
+    
 };

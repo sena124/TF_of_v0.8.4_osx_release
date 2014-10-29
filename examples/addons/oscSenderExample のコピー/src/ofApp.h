@@ -3,8 +3,8 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 
-#define HOST "localhost"
-#define PORT 12345
+#define HOST "169.254.40.194"
+#define PORT 8000
 
 //--------------------------------------------------------
 class ofApp : public ofBaseApp {
