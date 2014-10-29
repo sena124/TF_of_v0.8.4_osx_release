@@ -1,0 +1,20 @@
+import os.path
+import glob
+env = Environment(ENV = os.environ)
+release_build = env.Command("bin/test00.app", [], 'xcodebuild -configuration=Release')
+debug_build = env.Command("bin/test00Debug.app", [], 'xcodebuild -configuration=Debug')
+release  = env.Command("release", "bin/test00.app" , 'open bin/test00.app')
+debug  = env.Command("debug", "bin/test00Debug.app" , 'open bin/test00Debug.app')
+env.Alias("run", release)
+
+
+
+
+
+
+
+
+
+
+
+
